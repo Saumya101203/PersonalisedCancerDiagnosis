@@ -14,16 +14,17 @@ Personalized Cancer Diagnosis is a machine learning-based approach to predict ca
 
 - Python 3.x
 - Jupyter Notebook
-- Required Python libraries :
+- Required Python libraries (install via requirements.txt):
 
--- numpy
--- pandas
--- matplotlib
--- seaborn
--- scikit-learn
--- imbalanced-learn (for handling imbalanced datasets)
--- joblib (for model persistence)
-
+```
+- numpy
+- pandas
+- matplotlib
+- seaborn
+- scikit-learn
+- imbalanced-learn (for handling imbalanced datasets)
+- joblib (for model persistence)
+  ```
 ## Installation
 
 1. Clone this repository:
