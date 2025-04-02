@@ -14,7 +14,7 @@ Personalized Cancer Diagnosis is a machine learning-based approach to predict ca
 
 - Python 3.x
 - Jupyter Notebook
-- Required Python libraries (install via requirements.txt):
+- Required Python libraries (install via Requirements.txt):
 
 ```
 - numpy
