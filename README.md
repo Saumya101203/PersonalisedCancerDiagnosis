@@ -47,7 +47,7 @@ The dataset comes from **Memorial Sloan Kettering Cancer Center (MSKCC)** via Ka
 | Naïve Bayes              | 1.23         | 38.5%                   |
 | K-Nearest Neighbors      | **1.05**     | 35.7%                   |
 | Logistic Regression (CB) | 1.07         | **34.4%**               |
-| Logistic Regression      | 1.09         | 34.2%                   |
+| Logistic Regression      | 1.09         | 34.6%                   |
 | Linear SVM               | 1.12         | 35.1%                   |
 | Random Forest (OHE)      | 1.16         | 39.4%                   |
 | Random Forest (RC)       | 1.83         | 71.2%                   |
