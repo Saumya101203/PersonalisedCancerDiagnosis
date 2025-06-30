@@ -86,7 +86,7 @@ Also, make sure to download NLTK stopwords:
 import nltk
 nltk.download('stopwords')
 ```
-### Running on Google Colab
+### 🚀 Running on Google Colab
 If you are using Google Colab, follow these steps to set up the dataset:
 - **1. Upload Dataset to Google Drive**
   Create a folder in your Google Drive:
@@ -102,7 +102,7 @@ If you are using Google Colab, follow these steps to set up the dataset:
   drive.mount('/content/drive')
   ```
   
-###  Run the Notebook
+### ▶️ Run the Notebook
 - Open notebooks/Personalized_Cancer_Diagnosis.ipynb in Colab or Jupyter.
 - Run all cells sequentially to reproduce results.
 - Visualizations and model outputs will be generated in-place.
