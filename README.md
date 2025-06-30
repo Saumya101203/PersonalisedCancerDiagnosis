@@ -1,66 +1,108 @@
-# PersonalisedCancerDiagnosis
-## Overview
+# Personalized Cancer Diagnosis - ML-Based Genomic Classification
 
-Personalized Cancer Diagnosis is a machine learning-based approach to predict cancer types based on patient data. This project utilizes advanced data science techniques to provide accurate and personalized diagnostic insights.
+This project aims to classify genetic mutations into predefined cancer-related classes based on structured genomic data and associated clinical literature. It was inspired by the [MSKCC Kaggle Challenge](https://www.kaggle.com/c/msk-redefining-cancer-treatment), and focuses on building interpretable, probabilistic machine learning models suitable for real-world clinical use.
 
-## Features
+---
 
-- Data preprocessing and feature engineering.
-- Model training and evaluation using machine learning.
-- Prediction of cancer diagnosis based on input data.
-- Visualization of model performance and results.
+## 🧬 Problem Statement
 
-## Requirements
+Given a set of gene mutations and their corresponding clinical evidence in text format, classify each mutation into one of nine cancer-related classes. The classification must be:
 
-- Python 3.x
-- Jupyter Notebook
-- Required Python libraries (install via Requirements.txt):
+- **Probabilistic** (i.e., return the probability of each class)
+- **Interpretable** (critical in healthcare)
+- **Accurate**, minimizing the log-loss metric
 
-```
-- numpy
-- pandas
-- matplotlib
-- seaborn
-- scikit-learn
-- imbalanced-learn (for handling imbalanced datasets)
-- joblib (for model persistence)
-  ```
-## Installation
+---
 
-1. Clone this repository:
- ```
-git clone https://github.com/yourusername/PersonalizedCancerDiagnosis.git
-```
-2. Navigate to the project folder:
-```
-cd PersonalizedCancerDiagnosis
-```
-3. Install dependencies:
-```
+## 📁 Dataset
+
+The dataset comes from **Memorial Sloan Kettering Cancer Center (MSKCC)** via Kaggle and includes:
+
+- `training_variants.csv`: Structured data (ID, Gene, Variation, Class)
+- `training_text.csv`: Unstructured clinical literature (ID, Text)
+
+---
+
+## 🔍 Project Pipeline
+
+### 1. Data Preprocessing
+- Merged gene, variation, and text data on ID
+- Cleaned clinical text with lowercasing, punctuation removal, stopword filtering (using NLTK)
+
+### 2. Feature Engineering
+- Gene & Variation: One-Hot Encoding, Response Coding
+- Text: Bag-of-Words representation (optional)
+- Final feature matrix constructed by stacking categorical and text features
+
+### 3. Train / CV / Test Split
+- Stratified split with ratios 64% / 16% / 20%
+- Class distribution preserved in all splits
+
+---
+
+## 🤖 Models Implemented
+
+| Model                     | Log Loss     | Misclassification Rate |
+|--------------------------|--------------|-------------------------|
+| Naïve Bayes              | 1.23         | 38.5%                   |
+| K-Nearest Neighbors      | **1.05**     | 35.7%                   |
+| Logistic Regression (CB) | 1.07         | **34.4%**               |
+| Logistic Regression      | 1.09         | 34.2%                   |
+| Linear SVM               | 1.12         | 35.1%                   |
+| Random Forest (OHE)      | 1.16         | 39.4%                   |
+| Random Forest (RC)       | 1.83         | 71.2%                   |
+| Stacking Classifier      | 1.14         | 36.6%                   |
+| Majority Voting Classifier| 1.18        | 35.9%                   |
+
+- **CB** = Class Balanced
+- **OHE** = One-Hot Encoding
+- **RC** = Response Coding
+
+---
+
+## 🧠 Key Insights
+
+- Gene and text features were highly predictive; variation less so due to high cardinality and sparse coverage.
+- K-NN yielded the lowest log loss, while class-balanced Logistic Regression minimized classification error.
+- Ensemble methods (Stacking and Majority Voting) improved robustness.
+
+---
+
+## ⚙️ How to Run
+
+### Requirements
+
+Install dependencies via:
+
+```bash
 pip install -r requirements.txt
 ```
-## Usage
-1. Open the Jupyter Notebook:
+Or manually install key packages:
+```bash
+pip install numpy pandas scikit-learn matplotlib seaborn nltk imbalanced-learn mlxtend
 ```
-jupyter notebook
+Also, make sure to download NLTK stopwords:
+```bash
+import nltk
+nltk.download('stopwords')
 ```
-2. Run PersonalizedCancerDiagnosis.ipynb step-by-step.
-3. Observe the model training, evaluation, and prediction results.
-
-## Dataset
-
-- The dataset used for training should be placed in the appropriate directory.
-- Ensure proper preprocessing before feeding into the model.
-
-## Model
-
-- Machine learning models such as logistic regression, decision trees, or deep learning approaches may be used.
-- Evaluation metrics include accuracy, precision, recall, and F1-score.
-
-## Results
-
-- Model performance is visualized using plots and evaluation metrics.
-- The final model provides predictions for personalized cancer diagnosis.
-
-
-
+### Running on Google Colab
+If you are using Google Colab, follow these steps to set up the dataset:
+- **1. Upload Dataset to Google Drive**
+  Create a folder in your Google Drive:
+```
+  My Drive/
+└── cancer_diagnosis_project/
+    ├── training_variants.csv
+    └── training_text.csv
+```
+- **2. Mount Drive in Colab**
+  ```
+  from google.colab import drive
+  drive.mount('/content/drive')
+  ```
+  
+###  Run the Notebook
+- Open notebooks/Personalized_Cancer_Diagnosis.ipynb in Colab or Jupyter.
+- Run all cells sequentially to reproduce results.
+- Visualizations and model outputs will be generated in-place.
